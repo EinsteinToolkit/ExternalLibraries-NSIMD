@@ -1,0 +1,6 @@
+# make.configuration.defn file for thorn NSIMD
+
+# Define standard NSIMD utilities and install those that we could build/that are
+# present in the system
+STD_NSIMD_UTILS = 
+ALL_UTILS += $(STD_NSIMD_UTILS)

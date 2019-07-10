@@ -1,0 +1,32 @@
+# make.configuration.deps file for thorn NSIMD
+
+# Standard NSIMD utilities are copied from the install directory
+
+$(UTIL_DIR)/%: $(NSIMD_DIR)/bin/%
+	@echo "Copying $* from $< to $(UTIL_DIR)"
+	-$(MKDIR) $(MKDIRFLAGS) $(UTIL_DIR) 2> /dev/null
+	cp $< $@
+
+
+
+# Cactus NSIMD utilities are built
+
+NSIMD_BUILD_DIR = $(BUILD_DIR)/NSIMD
+NSIMD_SRC_DIR   = $(PACKAGE_DIR)/ExternalLibraries/NSIMD/src/util
+
+NSIMD_CFLAGS  = $(CPPFLAGS) -DCCODE -I$(CONFIG) -I$(BINDINGS_DIR)/include -I$(BINDINGS_DIR)/include/NSIMD -I$(FLESH_DIR)/include $(NSIMD_INC_DIRS:%=-I%) $(MPI_INC_DIRS:%=-I%) $(CFLAGS)
+NSIMD_LDFLAGS = $(DEBUG_LD) $(LDFLAGS) $(CXXFLAGS) $(EXTRAFLAGS) $(GENERAL_LIBRARIES)
+
+
+
+# Compile
+$(NSIMD_BUILD_DIR)/%.o: $(NSIMD_SRC_DIR)/%.c
+	@echo "Compiling $<"
+	-$(MKDIR) $(MKDIRFLAGS) $(NSIMD_BUILD_DIR) 2> /dev/null
+	$(CC) $< $(NSIMD_CFLAGS) -DTHORN_IS_NSIMD -c -o $@
+
+# Link
+$(UTIL_DIR)/%: $(NSIMD_BUILD_DIR)/%.o
+	@echo "Creating $* in $(UTIL_DIR) from $<"
+	-$(MKDIR) $(MKDIRFLAGS) $(UTIL_DIR) 2> /dev/null
+	$(LD) $< -o $@ $(NSIMD_LDFLAGS)

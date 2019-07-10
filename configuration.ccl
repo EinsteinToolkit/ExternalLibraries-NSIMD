@@ -1,0 +1,11 @@
+# Configuration definitions for thorn NSIMD
+
+PROVIDES NSIMD
+{
+  SCRIPT src/detect.sh
+  LANG bash
+  OPTIONS NSIMD NSIMD_DIR NSIMD_INSTALL_DIR NSIMD_INC_DIRS NSIMD_LIB_DIRS NSIMD_LIBS NSIMD_SIMD
+}
+
+# Pass configuration options to build script
+REQUIRES NSIMD
