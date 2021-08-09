@@ -23,7 +23,7 @@ fi
 
 # default values if unset
 if [ -z "${NSIMD_SIMD:+set}" ] ; then
-    NSIMD_SIMD="auto"
+    NSIMD_SIMD="cpu"
 fi
 
 
@@ -64,7 +64,9 @@ if [ -n "$NSIMD_BUILD" -o -z "${NSIMD_DIR}" ]; then
     # Fortran modules may be located in the lib directory
     NSIMD_INC_DIRS="${NSIMD_DIR}/include ${NSIMD_DIR}/lib"
     NSIMD_LIB_DIRS="${NSIMD_DIR}/lib"
-    NSIMD_LIBS="nsimd"
+    # name needs to be known at configure time, so autoconf at build is
+    # impossible
+    NSIMD_LIBS="nsimd_${NSIMD_SIMD}"
 else
     DONE_FILE=${SCRATCH_BUILD}/done/${THORN}
     if [ ! -e ${DONE_FILE} ]; then
