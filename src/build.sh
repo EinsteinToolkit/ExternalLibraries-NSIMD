@@ -42,6 +42,8 @@ cd ${NAME}
 mkdir build
 cd build
 
+unset LIBS
+
 cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_COMPILER=${CXX} -Dsimd=${NSIMD_SIMD} -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR} ..
 
 echo "NSIMD: Building..."
