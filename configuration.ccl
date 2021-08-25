@@ -9,3 +9,7 @@ PROVIDES NSIMD
 
 # Pass configuration options to build script
 REQUIRES NSIMD
+
+OPTIONAL CMake
+{
+}
