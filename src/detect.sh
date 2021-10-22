@@ -23,7 +23,7 @@ fi
 
 # default values if unset
 if [ -z "${NSIMD_SIMD:+set}" ] ; then
-    NSIMD_SIMD="cpu"
+    NSIMD_SIMD="CPU"
 fi
 
 
@@ -35,7 +35,7 @@ fi
 # assign default values to variables.
 # Try to find the library if build isn't explicitly requested
 if [ -z "${NSIMD_BUILD}" -a -z "${NSIMD_INC_DIRS}" -a -z "${NSIMD_LIB_DIRS}" -a -z "${NSIMD_LIBS}" ]; then
-    find_lib NSIMD nsimd 1 1.0 "nsimd" "nsimd/nsimd.hpp" "$NSIMD_DIR"
+    find_lib NSIMD nsimd 1 1.0 "nsimd_${NSIMD_SIMD}" "nsimd/nsimd.h" "$NSIMD_DIR"
 fi
 
 THORN=NSIMD
