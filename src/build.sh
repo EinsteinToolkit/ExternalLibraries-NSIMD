@@ -14,7 +14,7 @@ set -e                          # Abort on errors
 
 # Set locations
 THORN=NSIMD
-NAME=nsimd-2.2
+NAME=nsimd-3.0.1
 SRCDIR="$(dirname $0)"
 BUILD_DIR=${SCRATCH_BUILD}/build/${THORN}
 if [ -z "${NSIMD_INSTALL_DIR}" ]; then
