@@ -106,7 +106,12 @@ echo "NSIMD_SIMD           = ${NSIMD_SIMD}"
 echo "NSIMD_OPTIONALS      = ${NSIMD_OPTIONALS}"
 echo "END MAKE_DEFINITION"
 
-# Pass options to Cactus
+# Pass compiler options to Cactus
+echo "BEGIN DEFINE"
+echo "NSIMD_${NSIMD_SIMD}"
+echo "END DEFINE"
+
+# Pass linker options to Cactus
 echo "BEGIN MAKE_DEFINITION"
 echo "NSIMD_DIR            = ${NSIMD_DIR}"
 echo "NSIMD_INC_DIRS       = ${NSIMD_INC_DIRS}"
