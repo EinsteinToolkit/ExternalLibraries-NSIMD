@@ -1,1 +1,7 @@
 # Schedule definitions for thorn NSIMD
+
+schedule NSIMD_Test AT INITIAL
+{
+  LANG: C
+  options: global
+} "Self test for NSIMD"
