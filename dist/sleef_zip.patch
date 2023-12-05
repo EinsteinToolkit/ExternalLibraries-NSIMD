@@ -1,0 +1,25 @@
+Only in nsimd-3.0.1/egg: .get_sleef_code.py.swp
+diff '-x*~' -ru nsimd-3.0.1-orig/egg/get_sleef_code.py nsimd-3.0.1/egg/get_sleef_code.py
+--- nsimd-3.0.1-orig/egg/get_sleef_code.py	2021-10-19 05:28:56.000000000 -0500
++++ nsimd-3.0.1/egg/get_sleef_code.py	2023-12-05 09:09:05.211930625 -0600
+@@ -20,7 +20,6 @@
+ 
+ import common
+ import shutil
+-import requests
+ import zipfile
+ import os
+ 
+@@ -35,10 +34,10 @@
+     common.mkdir_p(sleef_dir)
+     url = 'https://github.com/shibatch/sleef/archive/refs/tags/{}.zip'. \
+           format(opts.sleef_version)
+-    r = requests.get(url, allow_redirects=True)
++    r = open(os.path.join(os.env["SRCDIR"], "..", "dist", "sleef.zip"),"rb")
+     sleef_zip = os.path.join(sleef_dir, 'sleef.zip')
+     with open(sleef_zip, 'wb') as fout:
+-        fout.write(r.content)
++        fout.write(r.read())
+ 
+     # Unzip sleef
+     with zipfile.ZipFile(sleef_zip, 'r') as fin:
