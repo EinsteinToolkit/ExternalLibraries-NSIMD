@@ -36,6 +36,22 @@ mkdir ${BUILD_DIR} ${INSTALL_DIR}
 echo "NSIMD: Unpacking archive..."
 pushd ${BUILD_DIR} >/dev/null
 ${TAR?} xf ${SRCDIR}/../dist/${NAME}.tar
+pushd ${NAME}
+${PATCH?} -p1 < ${SRCDIR}/../dist/sleef_zip.patch
+# Some (ancient but still used) versions of patch don't support the
+# patch format used here but also don't report an error using the exit
+# code. So we use this patch to test for this
+${PATCH?} -p1 < ${SRCDIR}/../dist/patchtest.patch
+if [ ! -e .patch_tmp ]; then
+    echo 'BEGIN ERROR'
+    echo 'The version of patch is too old to understand this patch format.'
+    echo 'Please set the PATCH environment variable to a more recent '
+    echo 'version of the patch command.'
+    echo 'END ERROR'
+    exit 1
+fi
+rm -f .patch_tmp
+popd
 
 echo "NSIMD: Configuring..."
 cd ${NAME}
@@ -43,6 +59,7 @@ mkdir build
 cd build
 
 unset LIBS
+export SRCDIR # needed to find sleef.zip
 
 ${CMAKE_DIR:+${CMAKE_DIR}/bin/}cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_COMPILER=${CXX} -Dsimd=${NSIMD_SIMD} -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR} ..
 
