@@ -98,21 +98,10 @@ fi
 # Configure Cactus
 ################################################################################
 
-# Pass configuration options to build script
+# Pass options to Cactus and build script
 echo "BEGIN MAKE_DEFINITION"
 echo "NSIMD_BUILD          = ${NSIMD_BUILD}"
 echo "NSIMD_INSTALL_DIR    = ${NSIMD_INSTALL_DIR}"
-echo "NSIMD_SIMD           = ${NSIMD_SIMD}"
-echo "NSIMD_OPTIONALS      = ${NSIMD_OPTIONALS}"
-echo "END MAKE_DEFINITION"
-
-# Pass compiler options to Cactus
-echo "BEGIN DEFINE"
-echo "NSIMD_${NSIMD_SIMD}"
-echo "END DEFINE"
-
-# Pass linker options to Cactus
-echo "BEGIN MAKE_DEFINITION"
 echo "NSIMD_DIR            = ${NSIMD_DIR}"
 echo "NSIMD_INC_DIRS       = ${NSIMD_INC_DIRS}"
 echo "NSIMD_LIB_DIRS       = ${NSIMD_LIB_DIRS}"
@@ -120,6 +109,14 @@ echo "NSIMD_LIBS           = ${NSIMD_LIBS}"
 echo "NSIMD_SIMD           = ${NSIMD_SIMD}"
 echo "NSIMD_OPTIONALS      = ${NSIMD_OPTIONALS}"
 echo "END MAKE_DEFINITION"
+
+# Pass compiler options to Cactus
+echo "BEGIN DEFINE"
+echo "NSIMD_${NSIMD_SIMD}"
+for opt in $NSIMD_OPTIONALS; do
+    echo "NSIMD_$opt"
+done
+echo "END DEFINE"
 
 echo 'INCLUDE_DIRECTORY $(NSIMD_INC_DIRS)'
 echo 'LIBRARY_DIRECTORY $(NSIMD_LIB_DIRS)'
