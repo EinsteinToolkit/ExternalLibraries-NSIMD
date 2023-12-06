@@ -1,7 +1,7 @@
 # Main make.code.deps file for thorn NSIMD
 
 export NSIMD_INSTALL_DIR CMAKE_DIR
-export NSIMD_SIMD
+export NSIMD_SIMD NSIMD_OPTIONALS
 
 $(CCTK_TARGET) $(OBJS) $(SRCS:%=%.d): $(SCRATCH_BUILD)/done/$(THORN)
 

@@ -61,6 +61,11 @@ cd build
 unset LIBS
 export SRCDIR # needed to find sleef.zip
 
+# actually have NSIMD compile code for the chosen architecture
+CXXFLAGS="$CXXFLAGS -DNSIMD_${NSIMD_SIMD}"
+for opt in ${NSIMD_OPTIONALS}; do
+    CXXFLAGS="$CXXFLAGS -D$opt"
+done
 ${CMAKE_DIR:+${CMAKE_DIR}/bin/}cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_COMPILER=${CXX} -Dsimd=${NSIMD_SIMD} -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR} ..
 
 echo "NSIMD: Building..."
