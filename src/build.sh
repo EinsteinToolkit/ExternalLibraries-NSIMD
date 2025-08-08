@@ -37,6 +37,7 @@ echo "NSIMD: Unpacking archive..."
 pushd ${BUILD_DIR} >/dev/null
 ${TAR?} xf ${SRCDIR}/../dist/${NAME}.tar
 pushd ${NAME}
+${PATCH?} -p1 < ${SRCDIR}/../dist/version.patch
 ${PATCH?} -p1 < ${SRCDIR}/../dist/sleef_zip.patch
 # Some (ancient but still used) versions of patch don't support the
 # patch format used here but also don't report an error using the exit

@@ -1,0 +1,12 @@
+diff -uw nsimd-3.0.1.orig/CMakeLists.txt nsimd-3.0.1/CMakeLists.txt
+--- nsimd-3.0.1.orig/CMakeLists.txt    2025-08-07 19:59:56.323564683 -0500
++++ nsimd-3.0.1/CMakeLists.txt 2025-08-07 20:00:16.062354082 -0500
+@@ -20,7 +20,7 @@
+ # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ # SOFTWARE.
+ 
+-cmake_minimum_required(VERSION 3.0.2)
++cmake_minimum_required(VERSION 3.0.2...3.25.0)
+ project(NSIMD VERSION 3.0 LANGUAGES C CXX)
+ 
+ # -----------------------------------------------------------------------------
